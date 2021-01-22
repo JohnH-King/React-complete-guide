@@ -76,24 +76,24 @@ deletePersonHandler = (personIndex) => {
 
         // console.log('was clicked');
         //     //this.state.persons[0].name = 'John';   DO NOT USE THIS, IT IS WRONG
- nameChangedHandler = (event, id) => {
-   const personIndex = this.state.persons.findIndex(p => {
-     return p.id === id;
-   });
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
 
-   const person = {
-    ...this.state.persons[personIndex] //... called a spread operator
-   };
+    const person = {
+      ...this.state.persons[personIndex]
+    };
 
-   //alternative: const person = Object.assign({}, this.state.persons[personIndex]); 
-   
-   person.name = event.target.value;
+    // const person = Object.assign({}, this.state.persons[personIndex]);
 
-   const persons = [...this.state.persons];
-   persons[personIndex] = person;
+    person.name = event.target.value;
 
-  this.setState( {person: persons});
-}
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
+  };
 
 // alt- inside setState
 // persons: [
@@ -102,7 +102,7 @@ deletePersonHandler = (personIndex) => {
 // {name: 'Jake, or Josh?', age: 26}
 // ]
 
-togglePersonHandler = () => {
+togglePersonsHandler = () => {
   const doesShow = this.state.showPersons;
   this.setState({showPersons: !doesShow});
 }
@@ -169,7 +169,7 @@ age={this.state.persons[2].age}  /> */
       <h1>Hi, I'm a React App</h1>
       <p className={assignedClasses.join(' ')}>Welcome John</p>                                                                 
        <button className={btnClass} alt={this.state.showPersons}
-        onClick={this.togglePersonHandler} >Toggle Persons</button> 
+        onClick={this.togglePersonsHandler} >Toggle Persons</button> 
         {/* { the first way shown using ternairy
           this.state.showPersons === true ? 
           <div>
