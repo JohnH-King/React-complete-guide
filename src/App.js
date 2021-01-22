@@ -1,7 +1,10 @@
 //import React, { useState } from 'react'; //react hook
 import React, {Component} from 'react';
-import './App.css';
+
+ 
+import classes from './App.css'; //section 5 end "import classes from"
 import Person from './Person/Person.js'
+
 
 //
 // const app = props => {
@@ -35,10 +38,27 @@ import Person from './Person/Person.js'
 
 //otherState: this.setState.otherState
 
-class app extends Component {
+
+      //a way to dynamically style ouside of CSS Modules
+// import styled from 'styled-components';
+// const StyledButton = styled.button`
+// background-color: ${props => props.alt ? 'red' : 'green'};
+// color: white;
+// font: inherit;
+// border: 1px solid blue;
+// padding: 8px;
+// cursor: pointer;
+
+// &:hover {
+//   background-color: ${props => props.alt ? 'salmos' : 'lightgreen'};
+//   color: black;
+// }
+// `;
+
+class App extends Component {
   state = {
     persons: [
-              { id: "asdasf", name: 'John', age: 24},
+            {id: "asdasf", name: 'John', age: 24},
             {id: "gfdjfd", name: 'Maximilian', age: 28},
             {id: "terfqa", name: 'Jake', age: 26}
           ],
@@ -94,15 +114,9 @@ togglePersonHandler = () => {
  
 
 render() {
-  const style = {
-    backgroundColor: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer'
-  };
 
 let persons = null;
+let btnClass = '';
 
 if(this.state.showPersons) {
   persons = (
@@ -118,6 +132,13 @@ if(this.state.showPersons) {
 
       </div>
   );
+  // style.backgroundColor = 'red';
+  // style[':hover'] = {
+  //     backgroundColor: 'salmon',
+  //     color: 'black'
+  // }; OR
+
+  btnClass = classes.Red;
 }
 
 /* alt to the {} function
@@ -134,13 +155,21 @@ click={this.switchNameHandler}  />
 person={this.state.persons[2].name} 
 age={this.state.persons[2].age}  /> */
 
+
+  const assignedClasses =[]; // class= "red bold"
+  if (this.state.persons.length <= 2){
+    assignedClasses.push(classes.red);
+  }
+  if (this.state.persons.length <= 1){
+    assignedClasses.push(classes.bold);
+  }
+
   return (
-    <div className="App">
+    <div className={classes.App}>
       <h1>Hi, I'm a React App</h1>
-      <p>Welcome John</p>                                                                 
-       <button
-        style={style}
-        onClick={this.togglePersonHandler}>Toggle Persons</button> 
+      <p className={assignedClasses.join(' ')}>Welcome John</p>                                                                 
+       <button className={btnClass} alt={this.state.showPersons}
+        onClick={this.togglePersonHandler} >Toggle Persons</button> 
         {/* { the first way shown using ternairy
           this.state.showPersons === true ? 
           <div>
@@ -160,12 +189,12 @@ age={this.state.persons[2].age}  /> */
      } */}
      {persons}
 
-    </div>    
+    </div>  
       );  
 };}
 
   
-export default app;
+export default App;
 
 
 
