@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
  
 import classes from './App.css'; //section 5 end "import classes from"
-import Person from './Person/Person.js'
+import Person from '../components/Persons/Person/Person.js';
 
 
 //
